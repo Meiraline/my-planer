@@ -1,3 +1,5 @@
+/*Для всего проекта*/
+
 html{
   text-align: center;
   background-color: #E5D6C5; 
@@ -13,6 +15,8 @@ html{
   justify-content: start;
  
 }
+
+/*Базовая разметка*/
 
 .BlokHome{
   padding: 1vw;
@@ -42,6 +46,7 @@ html{
   
 }
 
+/*Блоки меню*/
 
 .TopMenu{
   background-color: #F5E9DB;
