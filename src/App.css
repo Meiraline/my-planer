@@ -1,0 +1,59 @@
+html{
+  text-align: center;
+  background-color: #E5D6C5; 
+}
+
+.App {
+  text-align: center;
+  background-color: #E5D6C5;
+  
+ 
+ 
+}
+
+.BlokHome{
+  padding: 1vw;
+
+  display: grid;
+  grid-auto-flow: dense;
+
+  grid-template-columns: repeat(14, 6.05vw);
+  grid-auto-rows: 6.05vw;
+
+  gap: 1vw;
+}
+
+
+.Blok {
+  background-color: #F5E9DB;
+  border: 0.3vh solid #313131;
+  border-radius: 1rem;
+
+  
+  padding: 2vw;
+
+  grid-column: span 2;
+  grid-row: span 2;
+  
+}
+
+
+.TopMenu{
+  background-color: #F5E9DB;
+  border-bottom: 0.3vh solid #313131;
+  padding: 0.5vw;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.MenuBottom{
+  background-color: #F5E9DB;
+  border-top: 0.3vh solid #313131;
+  padding: 0.5vw;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
