@@ -6,19 +6,24 @@ html{
 .App {
   text-align: center;
   background-color: #E5D6C5;
-  
- 
+  height: 100vh;
+
+  display: flex;
+  flex-direction:column;
+  justify-content: start;
  
 }
 
 .BlokHome{
   padding: 1vw;
+  padding-top: 5vw;
+  padding-bottom: 5vw;
 
   display: grid;
   grid-auto-flow: dense;
 
-  grid-template-columns: repeat(14, 6.05vw);
-  grid-auto-rows: 6.05vw;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 7.05vw;
 
   gap: 1vw;
 }
@@ -32,7 +37,7 @@ html{
   
   padding: 2vw;
 
-  grid-column: span 2;
+  grid-column: span 12;
   grid-row: span 2;
   
 }
@@ -41,19 +46,29 @@ html{
 .TopMenu{
   background-color: #F5E9DB;
   border-bottom: 0.3vh solid #313131;
-  padding: 0.5vw;
+  padding: 1vw;
 
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: fixed;
+  width: 98vw;
 }
 
 .MenuBottom{
+  
   background-color: #F5E9DB;
   border-top: 0.3vh solid #313131;
-  padding: 0.5vw;
+  padding: 1vw;
 
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  position: fixed;
+  top: 94vh;
+  width: 98vw;
+  height: 100%;
+  
 }
+
