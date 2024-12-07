@@ -1,0 +1,13 @@
+.Blok {
+  
+    background-color: #F5E9DB;
+    border: 0.3vh solid #313131;
+    border-radius: 1rem;
+  
+  
+    padding: 2vw;
+    grid-column: span 4;
+    grid-row: span 2;
+  
+  }
+

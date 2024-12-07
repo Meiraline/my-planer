@@ -1,8 +1,7 @@
-/*Для всего проекта*/
 
-html{
+html {
   text-align: center;
-  background-color: #E5D6C5; 
+  background-color: #E5D6C5;
 }
 
 .App {
@@ -10,70 +9,18 @@ html{
   background-color: #E5D6C5;
   height: 100vh;
 
-  display: flex;
-  flex-direction:column;
-  justify-content: start;
- 
-}
+ display: flex;
+ flex-direction: column;
+ justify-content: start;
 
-/*Базовая разметка*/
-
-.BlokHome{
-  padding: 1vw;
-  padding-top: 5vw;
-  padding-bottom: 5vw;
-
-  display: grid;
-  grid-auto-flow: dense;
-
-  grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: 7.05vw;
-
-  gap: 1vw;
 }
 
 
-.Blok {
-  background-color: #F5E9DB;
-  border: 0.3vh solid #313131;
-  border-radius: 1rem;
 
-  
-  padding: 2vw;
 
-  grid-column: span 12;
-  grid-row: span 2;
-  
-}
 
-/*Блоки меню*/
 
-.TopMenu{
-  background-color: #F5E9DB;
-  border-bottom: 0.3vh solid #313131;
-  padding: 1vw;
 
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  position: fixed;
-  width: 98vw;
-}
 
-.MenuBottom{
-  
-  background-color: #F5E9DB;
-  border-top: 0.3vh solid #313131;
-  padding: 1vw;
 
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  position: fixed;
-  top: 94vh;
-  width: 98vw;
-  height: 100%;
-  
-}
 

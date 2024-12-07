@@ -1,6 +1,12 @@
+
+import classes from './MenuBottom.module.css'
+
+
+
+
 function MenuBottom(){
     return(
-      <div className='MenuBottom'>
+      <div className={classes.MenuBottom}>
         <div>
         <button>1</button>
         <button>2</button>

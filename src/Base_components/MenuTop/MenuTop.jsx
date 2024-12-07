@@ -1,10 +1,13 @@
+import classes from './MenuTop.module.css'
+
+
 function MenuTop(){
     return(
       
-      <div className='TopMenu'>
+      <div className={classes.TopMenu}>
         <div>
           <a>-logo-</a>
-          <a>-this page-</a>
+          <a>-this page-</a> 
         </div>
         
         <div>
@@ -18,6 +21,5 @@ function MenuTop(){
   }
 
   
-
   export default MenuTop;
   

@@ -1,0 +1,15 @@
+
+
+.BlokHome {
+    padding: 1vw;
+    padding-top: 5vw;
+    padding-bottom: 5vw;
+   
+    display: grid;
+    grid-auto-flow: dense;
+   
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 7.05vw;
+   
+    gap: 1vw;
+   }

@@ -1,0 +1,16 @@
+.MenuBottom {
+
+    background-color: #F5E9DB;
+    border-top: 0.3vh solid #313131;
+    padding: 1vw;
+  
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  
+    position: fixed;
+    top: 94vh;
+    width: 98vw;
+    height: 100%;
+  
+  }
