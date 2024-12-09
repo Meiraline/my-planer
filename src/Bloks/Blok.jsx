@@ -1,11 +1,11 @@
-import classes from "./Blok.module.css"
+import s from "./Blok.module.css"
 
 
 
-function Blok() {
+function Blok(p) {
     return (
-        <div className={classes.Blok}>
-            
+        <div className={s.Blok}>
+            {p.filling}
         </div>
     );
     

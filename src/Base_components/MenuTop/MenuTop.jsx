@@ -1,13 +1,17 @@
-import classes from './MenuTop.module.css'
+
+import s from './MenuTop.module.css'
 
 
 function MenuTop(){
     return(
       
-      <div className={classes.TopMenu}>
+      <div className={s.TopMenu}>
         <div>
-          <a>-logo-</a>
-          <a>-this page-</a> 
+          <a href='/main'>-logo-</a>
+          <a href='/profil'>-profil-</a>
+          <a href='/planer'>-planer-</a> 
+
+          
         </div>
         
         <div>

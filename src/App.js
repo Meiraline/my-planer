@@ -1,22 +1,23 @@
-import logo from './logo.svg';
+//import logo from './logo.png';
+
+import { BrowserRouter } from 'react-router-dom';
+
 import './App.css';
 import MenuTop from './Base_components/MenuTop/MenuTop';
-import BlokHome from './Base_components/BlokHome/BlokHome';
+import BlokHome from './Base_components/BlokHome/PageHome';
 import MenuBottom from './Base_components/MenuBottom/MenuBottom';
-
-
 
 
 
 function App() {
   return (
-    <div className="App">
-
-      <MenuTop />
-      <BlokHome />
-      <MenuBottom/>
-
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <MenuTop />
+        <BlokHome />
+        <MenuBottom />
+      </div>
+    </BrowserRouter>
   );
 }
 
