@@ -1,4 +1,5 @@
 
+import { NavLink } from 'react-router-dom';
 import s from './MenuTop.module.css'
 
 
@@ -7,9 +8,9 @@ function MenuTop(){
       
       <div className={s.TopMenu}>
         <div>
-          <a href='/main'>-logo-</a>
-          <a href='/profil'>-profil-</a>
-          <a href='/planer'>-planer-</a> 
+          <NavLink to ='/main'>-logo-</NavLink>
+          <NavLink to ='/profil'>-profil-</NavLink>
+          <NavLink to ='/planer'>-planer-</NavLink> 
 
           
         </div>

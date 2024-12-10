@@ -18,7 +18,7 @@ function PageHome() {
     return (
         <Routes>
             <Route path='/' element={<Main />} />
-            <Route path='/main' element={<Main />} />
+            <Route path='/main/*' element={<Main />} />
             <Route path='/profil' element={<Profil />} />
             <Route path='/planer' element={<Planer />} />
         </Routes>
