@@ -6,8 +6,8 @@
   
   
     padding: 2vw;
-    grid-column: span 12;
-    grid-row: span 2;
+    grid-column: span 3; 
+    grid-row: span 5;  
   
   }
 
