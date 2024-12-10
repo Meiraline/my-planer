@@ -1,5 +1,6 @@
+import React from 'react';
 import Blok from "../Bloks/Blok";
-import {TodoList, TodoList2} from "../Bloks/Bloks_Planer/TodoList";
+import {TodoList, TodoList2} from "../Bloks/Bloks_Planer/TodoList.jsx";
 
 
 

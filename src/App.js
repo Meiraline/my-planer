@@ -3,9 +3,9 @@
 import { BrowserRouter } from 'react-router-dom';
 
 import './App.css';
-import MenuTop from './Base_components/MenuTop/MenuTop';
-import PageHome from './Base_components/BlokHome/PageHome';
-import MenuBottom from './Base_components/MenuBottom/MenuBottom';
+import MenuTop from './Base_components/MenuTop/MenuTop.jsx';
+import PageHome from './Base_components/BlokHome/PageHome.jsx';
+import MenuBottom from './Base_components/MenuBottom/MenuBottom.jsx';
 
 
 
