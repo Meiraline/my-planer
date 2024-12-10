@@ -1,13 +1,19 @@
+:root {
+  --box-width: 2;
+  --box-height: 4;
+  --box-color: #F5E9DB ;
+}
+
+
+
 .Blok {
   
-    background-color: #F5E9DB;
+    background-color: var(--box-color);
     border: 0.3vh solid #313131;
     border-radius: 1rem;
   
   
     padding: 2vw;
-    grid-column: span 3; 
-    grid-row: span 5;  
   
   }
 

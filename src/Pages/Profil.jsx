@@ -1,5 +1,5 @@
 
-import Blok from "../Bloks/Blok";
+import Blok from "../Bloks/Blok.tsx";
 
 function Profil(){
     return(

@@ -1,6 +1,4 @@
 import React from 'react';
-import s from "./../Blok.module.css"
-
 
 type TaskType = {
     id: number;
@@ -20,8 +18,7 @@ type DataType = {
 
 export function TodoList(p: DataType) {
     return (
-        <div className={s.Blok}>
-
+        <div >
             <h3>{p.title}</h3>
 
             <div>
@@ -29,11 +26,21 @@ export function TodoList(p: DataType) {
                 <button>+</button>
             </div>
             <ul>
-                <li><input type='checkbox' checked={p.tasks[0].isDone}></input><span>{p.tasks[0].title}</span></li>
-                <li><input type='checkbox' checked={p.tasks[1].isDone}></input><span>{p.tasks[1].title}</span></li>
-                <li><input type='checkbox' checked={p.tasks[2].isDone}></input><span>{p.tasks[2].title}</span></li>
-             
-               
+                {
+                    p.tasks.map((t) => {
+                        return (
+                            <li>
+                                <input type='checkbox' checked={t.isDone} />
+                                <span>{t.title} </span>
+                                <button onClick={function () {
+                                    alert(t.id);
+                                }}> x </button>
+                            </li>
+                        )
+                    })
+                }
+
+
             </ul>
             <div>
                 <button>All</button>
@@ -41,9 +48,6 @@ export function TodoList(p: DataType) {
                 <button>Completed</button>
             </div>
 
-
-
         </div>
     )
 }
-
