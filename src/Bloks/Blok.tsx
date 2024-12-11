@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 
 interface BoxProps {
   maxWidth?: number;
@@ -24,52 +24,52 @@ export function Blok(p: BoxProps) {
 
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // Функция обновления размеров блока на основе контента
-  const updateSizeFromContent = () => {
+ 
+  const updateSizeFromContent = useCallback(() => {
     if (contentRef.current) {
       const contentWidth = contentRef.current.scrollWidth;
       const contentHeight = contentRef.current.scrollHeight;
 
-      // Округление вниз и устранение "лишнего" блока по вертикали
       const newWidth = Math.max(
         minWidth,
-        Math.min(Math.floor(contentWidth  / 60), maxWidth) // Округление вниз
+        Math.min(Math.floor(contentWidth / 60), maxWidth)
       );
 
       const newHeight = Math.max(
         minHeight,
-        Math.min(Math.floor((contentHeight - 50) / 80), maxHeight) // Убираем пиксель на лишний блок
+        Math.min(Math.floor((contentHeight - 50) / 80), maxHeight)
       );
 
       setWidth(newWidth);
       setHeight(newHeight);
 
-      // Проверка переполнения
       setOverflowX(newWidth >= maxWidth);
       setOverflowY(newHeight >= maxHeight);
     }
-  };
+  }, [minWidth, maxWidth, minHeight, maxHeight]); 
 
-  // Эффект для обновления размеров при изменении контента
   useEffect(() => {
     updateSizeFromContent();
-  }, [p.children]);
+  }, [p.children, updateSizeFromContent]); 
 
   return (
     <div
       style={{
         gridColumn: `span ${width}`,
         gridRow: `span ${height}`,
-        backgroundColor: "#F5E9DB",
-        border: "0.3vh solid #313131",
-        borderRadius: "1rem",
+        padding: "1vw",
+        boxSizing: "border-box",
+
         display: "flex",
         justifyContent: overflowX ? "flex-start" : "center",
         alignItems: overflowY ? "flex-start" : "center",
         overflowX: overflowX ? "auto" : "hidden",
         overflowY: overflowY ? "auto" : "hidden",
-        padding: "1vw",
-        boxSizing: "border-box",
+
+        backgroundColor: "#F5E9DB",
+        border: "0.3vh solid #313131",
+        borderRadius: "1rem",
+        
       }}
     >
       <div
@@ -77,7 +77,7 @@ export function Blok(p: BoxProps) {
         style={{
           width: "min-content",
           height: "min-content",
-          margin: "auto", // Центрирование контента
+          margin: "auto",
         }}
       >
         {p.children}
@@ -87,5 +87,3 @@ export function Blok(p: BoxProps) {
 }
 
 export default Blok;
-
-
