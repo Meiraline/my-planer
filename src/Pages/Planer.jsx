@@ -1,50 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Blok from "../Bloks/Blok.tsx";
-import {TodoList} from "../Bloks/Bloks_Planer/TodoList.tsx";
+import { TodoList } from "../Bloks/Bloks_Planer/TodoList.tsx";
 
 
-let tasks = [
-    { id: 1, title: "nameп", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
-   
-    
-  
+let initTasks =[
 
-   
-  
-    
+    { id: 1, title: "name", isDone: true },
+    { id: 2, title: "name", isDone: true },
+    { id: 3, title: "name", isDone: true },
+    { id: 4, title: "name", isDone: true },
+    { id: 5, title: "name", isDone: false },
+    { id: 6, title: "name", isDone: true },
+    { id: 7, title: "name", isDone: true },
+    { id: 8, title: "name", isDone: true },
+    { id: 9, title: "name", isDone: true },
+    { id: 10, title: "name", isDone: false },
+    { id: 11, title: "name", isDone: false },
+    { id: 12, title: "name", isDone: false },
 ]
-
-// function removeTask(id: number){
-
-// }
-
 
 
 function Planer() {
-    return (
-        <div className = "page">
-            
-            <Blok  minWidth={12} minHeight={1} >планер</Blok>
-            <Blok  minWidth={6} minHeight={1} maxHeight={6} maxWidth={4}>  <TodoList title='Список' tasks = {tasks}  /> </Blok>
-           
-  
+    
+    let [tasks, setTasks] = useState(initTasks);
+    
+    const removeTask = (id) => {
+        setTasks(tasks.filter((t) => t.id !== id));
+    }; 
 
-           
-            
-            
+    
+
+
+
+
+
+    return (
+        <div className="page">
+            <Blok minWidth={12} minHeight={1}>планер</Blok>
+            <Blok minWidth={6} minHeight={1} maxHeight={4} maxWidth={4}>
+                <TodoList title="Список" tasks={tasks} removeTask={removeTask} />
+            </Blok>
         </div>
-    )
+    );
 }
 
 export default Planer;

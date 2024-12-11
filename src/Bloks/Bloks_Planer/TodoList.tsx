@@ -8,11 +8,10 @@ type TaskType = {
 
 
 type DataType = {
-    title: string;
-    tasks: Array<TaskType>;
+    title: string
+    tasks: Array<TaskType>
+    removeTask: Function 
 }
-
-
 
 
 
@@ -27,17 +26,16 @@ export function TodoList(p: DataType) {
             </div>
             <ul>
                 {
-                    p.tasks.map((t) => {
-                        return (
+                    p.tasks.map( t => 
+                        
                             <li>
                                 <input type='checkbox' checked={t.isDone} />
                                 <span>{t.title} </span>
-                                <button onClick={function () {
-                                    alert(t.id);
-                                }}> x </button>
+
+                                <button onClick={ () => {p.removeTask(t.id)}}> x </button>
                             </li>
-                        )
-                    })
+                        
+                    )
                 }
 
 
