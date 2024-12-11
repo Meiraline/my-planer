@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect } from "react";
 
 interface BoxProps {
@@ -21,56 +20,47 @@ export function Blok(p: BoxProps) {
 
   const [width, setWidth] = useState(p.width || defaultWidth);
   const [height, setHeight] = useState(p.height || defaultHeight);
-  const [overflowX, setOverflowX] = useState(false);
-  const [overflowY, setOverflowY] = useState(false);
-
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // Функция для проверки, нужна ли прокрутка и изменяется ли размер блока
-  const updateOverflowAndResize = () => {
+  // Функция для проверки прокрутки и корректировки размеров
+  const updateSize = () => {
     if (contentRef.current) {
       const contentWidth = contentRef.current.scrollWidth;
       const contentHeight = contentRef.current.scrollHeight;
+      const containerWidth = contentRef.current.clientWidth;
+      const containerHeight = contentRef.current.clientHeight;
 
-      // Проверяем, нужна ли прокрутка по горизонтали
-      setOverflowX(contentWidth > contentRef.current.clientWidth);
-      // Проверяем, нужна ли прокрутка по вертикали
-      setOverflowY(contentHeight > contentRef.current.clientHeight);
-
-      // Проверяем и изменяем ширину блока, если необходимо
-      if (contentWidth > contentRef.current.clientWidth && width < maxWidth) {
-        setWidth(Math.min(width + 1, maxWidth)); // увеличиваем ширину, если нужно и если не достигнут максимум
-      } else if (contentWidth < contentRef.current.clientWidth && width > minWidth) {
-        setWidth(Math.max(width - 1, minWidth)); // уменьшаем ширину, если контент меньше и если не достигнут минимум
+      // Проверка на увеличение ширины
+      if (contentWidth > containerWidth && width < maxWidth) {
+        setWidth((prev) => Math.min(prev + 1, maxWidth));
+      }
+      // Проверка на уменьшение ширины
+      else if (contentWidth <= containerWidth && width > minWidth) {
+        setWidth((prev) => Math.max(prev - 1, minWidth));
       }
 
-      // Проверяем и изменяем высоту блока, если необходимо
-      if (contentHeight > contentRef.current.clientHeight && height < maxHeight) {
-        setHeight(Math.min(height + 1, maxHeight)); // увеличиваем высоту, если нужно и если не достигнут максимум
-      } else if (contentHeight < contentRef.current.clientHeight && height > minHeight) {
-        setHeight(Math.max(height - 1, minHeight)); // уменьшаем высоту, если контент меньше и если не достигнут минимум
+      // Проверка на увеличение высоты
+      if (contentHeight > containerHeight && height < maxHeight) {
+        setHeight((prev) => Math.min(prev + 1, maxHeight));
+      }
+      // Проверка на уменьшение высоты
+      else if (contentHeight <= containerHeight && height > minHeight) {
+        setHeight((prev) => Math.max(prev - 1, minHeight));
       }
     }
   };
 
-  // Используем ResizeObserver для отслеживания изменений размеров контента
+  // Проверка размеров при изменении контента
   useEffect(() => {
-    const resizeObserver = new ResizeObserver(updateOverflowAndResize);
-    if (contentRef.current) {
-      resizeObserver.observe(contentRef.current);
-    }
-
-    // Очистка observer при размонтировании
-    return () => resizeObserver.disconnect();
-  }, [width, height]); // Обновляем каждый раз при изменении размеров
+    updateSize();
+  }, [p.children]);
 
   return (
     <div
       style={{
         gridColumn: `span ${width}`,
         gridRow: `span ${height}`,
-        overflowX: overflowX ? "auto" : "hidden",
-        overflowY: overflowY ? "auto" : "hidden",
+        overflow: "hidden",
         backgroundColor: "#F5E9DB",
         border: "0.3vh solid #313131",
         borderRadius: "1rem",

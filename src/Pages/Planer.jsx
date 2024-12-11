@@ -8,20 +8,10 @@ let tasks = [
     { id: 2, title: "name2", isDone: true },
     { id: 3, title: "name", isDone: false },
     { id: 4, title: "name4", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
     { id: 2, title: "name2", isDone: true },
-    { id: 3, title: "name", isDone: false },
-    { id: 4, title: "name4", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
     { id: 2, title: "name2", isDone: true },
-    { id: 3, title: "name", isDone: false },
-    { id: 4, title: "name4", isDone: true },
-
-  
-
-
-  
-
+    { id: 2, title: "name2", isDone: true },
+    { id: 2, title: "name2", isDone: true },
     
 ]
 
@@ -34,7 +24,7 @@ let tasks = [
 function Planer() {
     return (
         <div className = "page">
-            <Blok> ррззззззззззззззззззззззззззззззззззззззззррззззззззззззззззззззззззззззззззззззззззррзззззззззззззззззззззззззззззззззззззззз  </Blok>
+            <Blok> ззззззззззззззззззззз </Blok>
             <Blok  width={1} height={3} />
             <Blok >  <TodoList title='Список' tasks = {tasks}  /> </Blok>
            
