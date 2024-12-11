@@ -17,12 +17,8 @@ let tasks = [
     { id: 6, title: "name6", isDone: true },
     { id: 6, title: "name6", isDone: true },
     { id: 6, title: "name6", isDone: true },
-    { id: 6, title: "name6", isDone: true },
-    { id: 6, title: "name6", isDone: true },
-    { id: 6, title: "name6", isDone: true },
-    { id: 6, title: "name6", isDone: true },
-    { id: 6, title: "name6", isDone: true },
-    { id: 6, title: "name6", isDone: true },
+  
+
 
   
 
@@ -38,7 +34,7 @@ let tasks = [
 function Planer() {
     return (
         <div className = "page">
-            <Blok width={4} height={1}>  </Blok>
+            <Blok> рррррррррррррррррррррррррррррррррр </Blok>
             <Blok  width={4} height={4} />
             <Blok >  <TodoList title='Список' tasks = {tasks}  /> </Blok>
            

@@ -1,5 +1,7 @@
+
 import React, { useRef, useState, useEffect } from "react";
 import { checkAndResizeBlock } from "./checkAndResizeBlock.tsx";
+
 
 interface BoxProps {
   width?: number;
@@ -34,8 +36,9 @@ export function Blok(p: BoxProps) {
       setOverflowX,
       setOverflowY,
     });
-    return cleanup; // Очистка observer при размонтировании
-  }, [width, height, p.children]);
+
+    return cleanup;
+  }, [width, height, maxWidth, maxHeight, p.children]); // Следим за p.children
 
   return (
     <div
