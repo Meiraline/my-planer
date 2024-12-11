@@ -1,8 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 
 interface BoxProps {
-  width?: number;
-  height?: number;
   maxWidth?: number;
   maxHeight?: number;
   minWidth?: number;
@@ -18,41 +16,36 @@ export function Blok(p: BoxProps) {
   const minWidth = p.minWidth || 1;
   const minHeight = p.minHeight || 1;
 
-  const [width, setWidth] = useState(p.width || defaultWidth);
-  const [height, setHeight] = useState(p.height || defaultHeight);
+  const [width, setWidth] = useState(defaultWidth);
+  const [height, setHeight] = useState(defaultHeight);
+
+  const [overflowX, setOverflowX] = useState(false);
+  const [overflowY, setOverflowY] = useState(false);
+
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // Функция для проверки прокрутки и корректировки размеров
-  const updateSize = () => {
+  // Обновление размеров блока на основе внутреннего контента
+  const updateSizeFromContent = () => {
     if (contentRef.current) {
-      const contentWidth = contentRef.current.scrollWidth;
-      const contentHeight = contentRef.current.scrollHeight;
-      const containerWidth = contentRef.current.clientWidth;
-      const containerHeight = contentRef.current.clientHeight;
+      const contentWidth = contentRef.current.offsetWidth;
+      const contentHeight = contentRef.current.offsetHeight;
 
-      // Проверка на увеличение ширины
-      if (contentWidth > containerWidth && width < maxWidth) {
-        setWidth((prev) => Math.min(prev + 1, maxWidth));
-      }
-      // Проверка на уменьшение ширины
-      else if (contentWidth <= containerWidth && width > minWidth) {
-        setWidth((prev) => Math.max(prev - 1, minWidth));
-      }
+      // Рассчитываем новые размеры
+      const newWidth = Math.max(minWidth, Math.min(Math.ceil(contentWidth / 50), maxWidth));
+      const newHeight = Math.max(minHeight, Math.min(Math.ceil(contentHeight / 50), maxHeight));
 
-      // Проверка на увеличение высоты
-      if (contentHeight > containerHeight && height < maxHeight) {
-        setHeight((prev) => Math.min(prev + 1, maxHeight));
-      }
-      // Проверка на уменьшение высоты
-      else if (contentHeight <= containerHeight && height > minHeight) {
-        setHeight((prev) => Math.max(prev - 1, minHeight));
-      }
+      setWidth(newWidth);
+      setHeight(newHeight);
+
+      // Проверка на переполнение
+      setOverflowX(newWidth >= maxWidth);
+      setOverflowY(newHeight >= maxHeight);
     }
   };
 
-  // Проверка размеров при изменении контента
+  // Эффект для обновления размеров при изменении контента
   useEffect(() => {
-    updateSize();
+    updateSizeFromContent();
   }, [p.children]);
 
   return (
@@ -60,14 +53,25 @@ export function Blok(p: BoxProps) {
       style={{
         gridColumn: `span ${width}`,
         gridRow: `span ${height}`,
-        overflow: "hidden",
         backgroundColor: "#F5E9DB",
         border: "0.3vh solid #313131",
         borderRadius: "1rem",
-        padding: "2vw",
+        display: "flex",
+        justifyContent: "center", // Центрирование по горизонтали
+        alignItems: "center", // Центрирование по вертикали
+        overflowX: overflowX ? "auto" : "hidden",
+        overflowY: overflowY ? "auto" : "hidden",
+        padding: "1vw",
+        boxSizing: "border-box",
       }}
     >
-      <div ref={contentRef} style={{ width: "100%", height: "100%" }}>
+      <div
+        ref={contentRef}
+        style={{
+          width: "min-content",
+          height: "min-content",
+        }}
+      >
         {p.children}
       </div>
     </div>
