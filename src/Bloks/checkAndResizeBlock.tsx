@@ -14,80 +14,72 @@ interface CheckOverflowParams {
   setOverflowY: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const checkAndResizeBlock = ({
-  contentRef,
-  width,
-  height,
-  setWidth,
-  setHeight,
-  maxWidth,
-  maxHeight,
-  minWidth = 2,
-  minHeight = 2,
-  setOverflowX,
-  setOverflowY,
-}: CheckOverflowParams) => {
-  let timeoutId: number | null = null;
-
-  const resizeBlock = () => {
-    if (!contentRef.current) return;
-
-    const content = contentRef.current;
-    const { scrollHeight, scrollWidth, clientHeight, clientWidth } = content;
-
-    let updated = false;
-
-    // Проверка уменьшения высоты
-    if (scrollHeight <= clientHeight - 10 && height > minHeight) {
-      setHeight((prev) => prev - 1);
-      updated = true;
-    }
-
-    // Проверка уменьшения ширины
-    if (scrollWidth <= clientWidth - 10 && width > minWidth) {
-      setWidth((prev) => prev - 1);
-      updated = true;
-    }
-
-    // Проверка увеличения высоты
-    if (scrollHeight > clientHeight && height < maxHeight) {
-      setHeight((prev) => prev + 1);
-      updated = true;
-    }
-
-    // Проверка увеличения ширины
-    if (scrollWidth > clientWidth && width < maxWidth) {
-      setWidth((prev) => prev + 1);
-      updated = true;
-    }
-
-    // Включаем прокрутку при достижении максимума
-    setOverflowY(height >= maxHeight && scrollHeight > clientHeight);
-    setOverflowX(width >= maxWidth && scrollWidth > clientWidth);
-
-    // Повторный вызов при изменении
-    if (updated && !timeoutId) {
-      timeoutId = window.setTimeout(() => {
-        timeoutId = null;
-        resizeBlock();
-      }, 50);
-    }
-  };
-
-  const observer = new MutationObserver(resizeBlock);
-
-  if (contentRef.current) {
-    observer.observe(contentRef.current, {
-      childList: true,
-      subtree: true,
-      characterData: true,
-    });
+export function checkAndResizeBlock({
+    contentRef,
+    width,
+    height,
+    setWidth,
+    setHeight,
+    maxWidth,
+    maxHeight,
+    minWidth = 2,  // Минимальные значения по умолчанию
+    minHeight = 2,
+    setOverflowX,
+    setOverflowY,
+  }: CheckOverflowParams) {
+    const element = contentRef.current;
+    if (!element) return;
+  
+    let resizeTimeout: NodeJS.Timeout | null = null;
+  
+    const resize = () => {
+      if (!element) return;
+  
+      const contentWidth = element.scrollWidth;
+      const contentHeight = element.scrollHeight;
+  
+      const parentWidth = element.clientWidth;
+      const parentHeight = element.clientHeight;
+  
+      let newWidth = width;
+      let newHeight = height;
+  
+      // Увеличиваем блок, если контент выходит за пределы
+      if (contentWidth > parentWidth && width < maxWidth) {
+        newWidth = Math.min(width + 1, maxWidth);
+      } else if (contentHeight > parentHeight && height < maxHeight) {
+        newHeight = Math.min(height + 1, maxHeight);
+      }
+  
+      // Уменьшаем блок, если контент меньше размера блока (с учётом минимальных значений)
+      if (contentWidth <= parentWidth && contentHeight <= parentHeight) {
+        if (width > minWidth) newWidth = Math.max(width - 1, minWidth);
+        if (height > minHeight) newHeight = Math.max(height - 1, minHeight);
+      }
+  
+      // Обновляем размеры, только если они изменились
+      if (newWidth !== width || newHeight !== height) {
+        setWidth(newWidth);
+        setHeight(newHeight);
+      }
+  
+      // Обновляем флаги прокрутки
+      setOverflowX(contentWidth > element.clientWidth);
+      setOverflowY(contentHeight > element.clientHeight);
+    };
+  
+    const debouncedResize = () => {
+      if (resizeTimeout) clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(resize, 100); // Задержка для предотвращения частых вызовов
+    };
+  
+    // Наблюдатель за изменениями размера
+    const observer = new ResizeObserver(debouncedResize);
+    observer.observe(element);
+  
+    return () => {
+      if (resizeTimeout) clearTimeout(resizeTimeout);
+      observer.disconnect();
+    };
   }
-
-  resizeBlock();
-
-  return () => {
-    observer.disconnect();
-    if (timeoutId) clearTimeout(timeoutId);
-  };
-};
+  
