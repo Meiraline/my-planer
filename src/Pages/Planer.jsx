@@ -16,16 +16,12 @@ let tasks = [
     { id: 1, title: "nameп", isDone: true },
     { id: 1, title: "nameп", isDone: true },
     { id: 1, title: "nameп", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
-    { id: 1, title: "nameп", isDone: true },
    
+    
+  
+
+   
+  
     
 ]
 
@@ -38,7 +34,18 @@ let tasks = [
 function Planer() {
     return (
         <div className = "page">
-            <Blok>rкккккккккккккккккккккккккккккккккккккккккккккккккккккккккккккккккк</Blok>
+            <Blok> <p>rккккккккккккккккккккк</p>
+              <p>rккккккккккккккккккккк</p>
+<p>rккккккккккккккккккккк</p>
+<p>rккккккккккккккккккккк</p>
+<p>rккккккккккккккк</p>
+<p>rккккккккккккккккккккк</p>
+<p>rккккккккккккккккккккк</p>
+              <p>rккккккккккккккккккккк</p>
+              <p>rккккккккккккккккккккк</p>
+              <p>rккккккккккккккккккккк</p>
+              <p>rккккккккккккккккккккк</p>
+            </Blok>
             <Blok  width={2} height={3} />
             <Blok >  <TodoList title='Список' tasks = {tasks}  /> </Blok>
            

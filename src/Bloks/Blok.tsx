@@ -24,20 +24,27 @@ export function Blok(p: BoxProps) {
 
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // Обновление размеров блока на основе внутреннего контента
+  // Функция обновления размеров блока на основе контента
   const updateSizeFromContent = () => {
     if (contentRef.current) {
-      const contentWidth = contentRef.current.offsetWidth;
-      const contentHeight = contentRef.current.offsetHeight;
+      const contentWidth = contentRef.current.scrollWidth;
+      const contentHeight = contentRef.current.scrollHeight;
 
-      // Рассчитываем новые размеры
-      const newWidth = Math.max(minWidth, Math.min(Math.ceil(contentWidth / 50), maxWidth));
-      const newHeight = Math.max(minHeight, Math.min(Math.ceil(contentHeight / 50), maxHeight));
+      // Округление вниз и устранение "лишнего" блока по вертикали
+      const newWidth = Math.max(
+        minWidth,
+        Math.min(Math.floor(contentWidth  / 60), maxWidth) // Округление вниз
+      );
+
+      const newHeight = Math.max(
+        minHeight,
+        Math.min(Math.floor((contentHeight - 50) / 80), maxHeight) // Убираем пиксель на лишний блок
+      );
 
       setWidth(newWidth);
       setHeight(newHeight);
 
-      // Проверка на переполнение
+      // Проверка переполнения
       setOverflowX(newWidth >= maxWidth);
       setOverflowY(newHeight >= maxHeight);
     }
@@ -57,8 +64,8 @@ export function Blok(p: BoxProps) {
         border: "0.3vh solid #313131",
         borderRadius: "1rem",
         display: "flex",
-        justifyContent: "center", // Центрирование по горизонтали
-        alignItems: "center", // Центрирование по вертикали
+        justifyContent: overflowX ? "flex-start" : "center",
+        alignItems: overflowY ? "flex-start" : "center",
         overflowX: overflowX ? "auto" : "hidden",
         overflowY: overflowY ? "auto" : "hidden",
         padding: "1vw",
@@ -70,6 +77,7 @@ export function Blok(p: BoxProps) {
         style={{
           width: "min-content",
           height: "min-content",
+          margin: "auto", // Центрирование контента
         }}
       >
         {p.children}
@@ -79,3 +87,5 @@ export function Blok(p: BoxProps) {
 }
 
 export default Blok;
+
+
