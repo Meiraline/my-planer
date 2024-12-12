@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+
 type TaskType = {
     id: number;
     title: string;
@@ -21,7 +23,7 @@ export function TodoList(p: DataType) {
             <h3>{p.title}</h3>
 
             <div>
-                <input type='text'></input>
+                <input type='text' className='input_text'></input>
                 <button>+</button>
             </div>
             <ul>
@@ -29,10 +31,10 @@ export function TodoList(p: DataType) {
                     p.tasks.map( t => 
                         
                             <li>
-                                <input type='checkbox' checked={t.isDone} />
+                                <input className='input_checkbox' type='checkbox' checked={t.isDone} />
                                 <span>{t.title} </span>
 
-                                <button onClick={ () => {p.removeTask(t.id)}}> x </button>
+                                <button  onClick={ () => {p.removeTask(t.id)}}> x </button>
                             </li>
                         
                     )
