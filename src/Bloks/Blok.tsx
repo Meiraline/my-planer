@@ -29,8 +29,8 @@ export function Blok(p: BoxProps) {
       const contentHeight = contentRef.current.scrollHeight;
 
       // Рассчитываем новые размеры блока с учётом текущих значений min/max
-      const newWidth = Math.min(maxWidth, Math.max(minWidth, Math.floor(contentWidth / 60)));
-      const newHeight = Math.min(maxHeight, Math.max(minHeight, Math.floor(contentHeight / 80)));
+      const newWidth = Math.min(maxWidth, Math.max(minWidth, Math.floor(contentWidth / 50)));
+      const newHeight = Math.min(maxHeight, Math.max(minHeight, Math.floor(contentHeight / 50)));
 
       // Обновляем состояние
       setWidth(newWidth);
@@ -51,23 +51,26 @@ export function Blok(p: BoxProps) {
       style={{
         gridColumn: `span ${width}`,
         gridRow: `span ${height}`,
-        backgroundColor: "#F5E9DB",
-        border: "0.3vh solid #313131",
-        borderRadius: "1rem",
-        display: "flex",
         justifyContent: overflowX ? "flex-start" : "center",
         alignItems: overflowY ? "flex-start" : "center",
         overflowX: overflowX ? "auto" : "hidden",
         overflowY: overflowY ? "auto" : "hidden",
+
         padding: "1vw",
         boxSizing: "border-box",
+
+        backgroundColor: "#F5E9DB",
+        border: "0.3vh solid #313131",
+        borderRadius: "1rem",
+
+        display: "flex",
       }}
     >
       <div
         ref={contentRef}
         style={{
-          width: "min-content",
-          height: "min-content",
+          width: "fit-content",
+          height: "fit-content",
           margin: "auto",
         }}
       >

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import Blok from "../Bloks/Blok.tsx";
 import { TodoList } from "../Bloks/Bloks_Planer/TodoList.tsx";
 
@@ -37,9 +38,10 @@ function Planer() {
     return (
         <div className="page">
             <Blok minWidth={12} minHeight={1}>планер</Blok>
-            <Blok minWidth={6} minHeight={1} maxHeight={4} maxWidth={4}>
+            <Blok minWidth={4} minHeight={4} maxHeight={7} maxWidth={4}>
                 <TodoList title="Список" tasks={tasks} removeTask={removeTask} />
             </Blok>
+            
         </div>
     );
 }
