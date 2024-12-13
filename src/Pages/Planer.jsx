@@ -37,7 +37,7 @@ function Planer() {
     return (
         <div className="page">
             <Blok minWidth={12} minHeight={1}>планер</Blok>
-            <Blok minWidth={6} minHeight={1} maxHeight={4} maxWidth={4}>
+            <Blok minWidth={6} minHeight={1} maxHeight={8} maxWidth={4}>
                 <TodoList title="Список" tasks={tasks} removeTask={removeTask} />
             </Blok>
         </div>

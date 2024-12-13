@@ -1,3 +1,140 @@
+:root {
+
+  /* Цветовая палитра интерфейса */
+  
+    /* по умолчанию */
+
+  --main-bg-color: #f1dac2;
+  --meni-bg-color: #F5E9DB;
+
+  --border-color: #313131;
+
+  --akcent-color-1: #CEB5DC;
+  --akcent-color-2: #89C89B;
+  --akcent-color-3: #F1A297;
+  --akcent-color-4: #a0d2db;
+  --akcent-color-5: #e5e7ac;
+
+    /* дневная тема
+
+  --main-bg-color-lt: #E5D6C5;
+  --meni-bg-color-lt: #F5E9DB;
+
+  --border-color-lt: #313131;
+
+  --akcent-color-1-lt: #CEB5DC;
+  --akcent-color-2-lt: #89C89B;
+  --akcent-color-3-lt: #F1A297;
+  --akcent-color-4-lt: #a0d2db;
+  --akcent-color-5-lt: #e5e7ac;
+
+    /* ночная тема */
+
+  /* --main-bg-color-dr: #525252;
+  --meni-bg-color-dr: #434343;
+
+  --border-color-dr: #fafafa;
+
+  --akcent-color-1-dr: #c56df8;
+  --akcent-color-2-dr: #6aef90;
+  --akcent-color-3-dr: #fb7b6b;
+  --akcent-color-4-dr: #70e4f8;
+  --akcent-color-5-dr: #fbff89; */
+
+    /* Текст */
+  --font-size: 1.3vw;
+
+    /* Базовые настройки */
+  --border: 0.3vh solid #313131;
+  --borderRadius: 1rem,
+
+}
+
+
+/* стандартные элементы */
+
+button {
+  background-color: var(--akcent-color-4);
+  border: var(--border);
+  border-radius: 0.5rem;
+  font-size: var(--font-size);
+
+  margin: 0.5vw;
+
+  width: min-content;
+  height: min-content;
+  
+}
+
+li {
+  list-style-type: none;
+  list-style-position: outside;
+  display: flex;
+  justify-content:space-between;
+  
+}
+
+ul {
+  padding: 0px;
+
+}
+
+
+.input_checkbox {
+  width: 1.5vw;
+  height: 1.5vw;
+}
+
+.input_text {
+  width: 20vw;
+  height: 1.5vw;
+}
+
+
+/* стили базовой страници */
+
+html {
+  text-align: center;
+  background-color: var(--main-bg-color);
+  font-size: var(--font-size);
+}
+
+.App {
+  text-align: center;
+  background-color: var(--main-bg-color);
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+
+}
+
+.page {
+  padding: 1vw;
+  padding-top: 10vw;
+  padding-bottom: 10vw;
+
+  margin-top: 5vw;
+  margin-bottom: 5vw;
+
+  display: grid;
+  grid-auto-flow: dense;
+
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 7.05vw;
+
+  gap: 1vw;
+}
+
+
+
+
+
+
+
+
+
 
 html {
   text-align: center;
