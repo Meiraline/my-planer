@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { FilterValuesType } from '../../Pages/Planer';
 
-type TaskType = {
-    id: number;
+export type TaskType = {
+    id: string;
     title: string;
     isDone: boolean;
 }
@@ -10,20 +11,51 @@ type TaskType = {
 type DataType = {
     title: string
     tasks: Array<TaskType>
-    removeTask: Function 
+    removeTask: (id: number) => void
+    chengeFilter: (value: FilterValuesType) => void
+    addTask: Function
 }
 
 
 
 export function TodoList(p: DataType) {
+
+    const [NewTaskeTitle, setNewTaskeTitle] = useState("");
+
+    const onNewTitleChengeHander = (e: ChangeEvent<HTMLInputElement>) => { 
+        setNewTaskeTitle(e.currentTarget.value)
+    }; 
+
+    const OnKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+            if (e.code === 'Enter' ){
+                p.addTask(NewTaskeTitle);
+                setNewTaskeTitle("");
+            }
+    }
+
+    const addTask = () => {
+        p.addTask(NewTaskeTitle);
+        setNewTaskeTitle("");
+    }
+
+
+
     return (
         <div >
             <h3>{p.title}</h3>
 
             <div>
-                <input type='text'></input>
-                <button>+</button>
+
+                <input 
+                value={NewTaskeTitle} 
+                onChange={ onNewTitleChengeHander }
+                onKeyDown = { OnKeyPressHandler }
+                ></input>
+
+                <button onClick={addTask} >+</button>
+
             </div>
+            
             <ul>
                 {
                     p.tasks.map( t => 
@@ -41,9 +73,9 @@ export function TodoList(p: DataType) {
 
             </ul>
             <div>
-                <button>All</button>
-                <button>Active</button>
-                <button>Completed</button>
+                <button onClick={() => {p.chengeFilter("all")}} >All</button>
+                <button onClick={() => {p.chengeFilter("active")}} >Active</button>
+                <button onClick={() => {p.chengeFilter("completed")}} >Completed</button>
             </div>
 
         </div>

@@ -3,7 +3,7 @@ import Blok from "../Bloks/Blok.tsx";
 
 function Profil(){
     return(
-        <div className = "page">
+        <div className = "page1">
              <Blok filling = "profil"/>
         </div>
     )

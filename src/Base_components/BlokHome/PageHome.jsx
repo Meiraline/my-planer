@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 
 // Список всех страниц
 
-import Planer from "../../Pages/Planer";
+import Planer from "../../Pages/Planer.tsx";
 import Profil from "../../Pages/Profil";
 import Main from '../../Pages/Main';
 

@@ -9,8 +9,8 @@ interface BoxProps {
 }
 
 export function Blok(p: BoxProps) {
-  const maxWidth = p.maxWidth || 12;
-  const maxHeight = p.maxHeight || 12;
+  const maxWidth = p.maxWidth || 24;
+  const maxHeight = p.maxHeight || 24;
   const minWidth = p.minWidth || 1;
   const minHeight = p.minHeight || 1;
 
@@ -29,7 +29,7 @@ export function Blok(p: BoxProps) {
       const contentHeight = contentRef.current.scrollHeight;
 
       // Рассчитываем новые размеры блока с учётом текущих значений min/max
-      const newWidth = Math.min(maxWidth, Math.max(minWidth, Math.floor(contentWidth / 50)));
+      const newWidth = Math.min(maxWidth, Math.max(minWidth, Math.floor(contentWidth / 60)));
       const newHeight = Math.min(maxHeight, Math.max(minHeight, Math.floor(contentHeight / 50)));
 
       // Обновляем состояние

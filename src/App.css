@@ -42,7 +42,7 @@
   --akcent-color-5-dr: #fbff89; */
 
     /* Текст */
-  --font-size: 1.3vw;
+  --font-size: 0.8vw;
 
     /* Базовые настройки */
   --border: 0.3vh solid #313131;
@@ -110,19 +110,19 @@ html {
 
 }
 
-.page {
+.page1 {
   padding: 1vw;
   padding-top: 10vw;
   padding-bottom: 10vw;
 
-  margin-top: 5vw;
+  margin-top: 0vw;
   margin-bottom: 5vw;
 
   display: grid;
   grid-auto-flow: dense;
 
-  grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: 7.05vw;
+  grid-template-columns: repeat(24, 1fr);
+  grid-auto-rows: 3.3vw;
 
   gap: 1vw;
 }
