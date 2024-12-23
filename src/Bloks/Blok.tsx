@@ -30,7 +30,7 @@ export function Blok(p: BoxProps) {
 
       // Рассчитываем новые размеры блока с учётом текущих значений min/max
       const newWidth = Math.min(maxWidth, Math.max(minWidth, Math.floor(contentWidth / 60)));
-      const newHeight = Math.min(maxHeight, Math.max(minHeight, Math.floor(contentHeight / 50)));
+      const newHeight = Math.min(maxHeight, Math.max(minHeight, Math.floor(contentHeight / 40)));
 
       // Обновляем состояние
       setWidth(newWidth);

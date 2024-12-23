@@ -90,6 +90,25 @@ ul {
   height: 1.5vw;
 }
 
+/* стили для тудулиста (вынести в отдельный файл) */
+
+
+.error{
+  border:  0.3vh solid #F1A297 ;
+}
+
+.error-message{
+  color: #d4341f;
+}
+
+.active-filter{
+  background-color: #CEB5DC;
+}
+
+.is-done{
+  opacity: 0.5;
+}
+
 
 /* стили базовой страници */
 
