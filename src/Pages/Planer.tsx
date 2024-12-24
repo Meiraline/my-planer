@@ -151,7 +151,8 @@ function addTodolist(title: string) {
     return (
 
         <div className="page1">
-            <Blok minWidth={24} minHeight={2}> 
+            <Blok minWidth={24} minHeight={3}> 
+                <h3>Добавить список</h3>
             <AddItemForm addItem = {addTodolist} />
             </Blok>
 

@@ -3,7 +3,7 @@ import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 
 type AddItemFormPropsType = {
 
-    // addItem: (title: string) => void
+    
     addItem: (title: string) => void
     
 
@@ -37,8 +37,6 @@ function AddItemForm(p: AddItemFormPropsType){
             setError("Ошибка: это поле не может быть пустым")
         }
 
-        // p.addItem(title, p.id);
-        // setTitle("");
 
         
     }
