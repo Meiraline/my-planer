@@ -10,19 +10,20 @@ function MenuTop(){
       
       <div className={s.TopMenu}>
           <NavLink to ='/main'> <img src={logo} alt="" /> </NavLink>
-        <div>
-          <NavLink to ='/profil'>-profil-</NavLink>
-          <NavLink to ='/planer'>-planer-</NavLink> 
+        <div className={s.meni}>
+        Planer
+          {/* <NavLink to ='/profil'>-profil-</NavLink> */}
+          {/* <NavLink to ='/planer'>-planer-</NavLink>  */}
 
           
         </div>
         
-        <div>
+        {/* <div>
           <button>1</button>
           <button>2</button>
           <button>3</button>
           <button>4</button>
-        </div>
+        </div> */}
       </div>
     )
   }

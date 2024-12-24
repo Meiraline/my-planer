@@ -119,7 +119,7 @@ html {
 }
 
 .App {
-  text-align: center;
+  text-align: left;
   background-color: var(--main-bg-color);
   height: 100vh;
 

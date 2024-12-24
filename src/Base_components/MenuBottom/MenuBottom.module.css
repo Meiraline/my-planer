@@ -14,3 +14,10 @@
     height: 100%;
   
   }
+
+  .BigButton{
+    font-size: 2vw;
+    border-radius: 100rem;
+    margin-right: 2vw;
+    margin-top: -0.2vw;
+  }

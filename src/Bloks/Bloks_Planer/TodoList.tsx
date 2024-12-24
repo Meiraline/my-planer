@@ -18,14 +18,17 @@ type DataType = {
     tasks: Array<TaskType>
 
     error: any
-    setError: any
+    
     
     filter: any
     
-    removeTask: (id: string) => void
+    removeTask: (id: string, todoListId: string) => void
     chengeFilter: (value: FilterValuesType, todoListId: string ) => void
-    addTask: (title: string) => void
-    changeTaskStatus: (id: string , isDone: boolean) => void
+    addTask: (title: string, todoListId: string) => void
+    changeTaskStatus: (id: string , isDone: boolean , todoListId: string) => void
+
+    removeTodolist:(todoListId: string) => void
+
 }
 
 
@@ -38,28 +41,30 @@ export function TodoList(p: DataType) {
 
     const onNewTitleChengeHander = (e: ChangeEvent<HTMLInputElement>) => { 
         setNewTaskeTitle(e.currentTarget.value)
-    }; 
+    }
 
     const OnKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-            p.setError(null);
+            
             if (e.code === 'Enter' ){
-                p.addTask(NewTaskeTitle);
-                setNewTaskeTitle("");
+                p.addTask(NewTaskeTitle, p.id);
+                
             }
     }
 
     const addTask = () => {
-        p.addTask(NewTaskeTitle);
+        p.addTask(NewTaskeTitle, p.id);
         setNewTaskeTitle("");
 
         
     }
 
-    
+    const removeTodolist = () => {
+        p.removeTodolist(p.id)
+    } 
 
     return (
         <div >
-            <h3>{p.title}</h3>
+            <h3>{p.title} <button onClick={removeTodolist} >x</button> </h3>
 
             <div>
 
@@ -79,10 +84,10 @@ export function TodoList(p: DataType) {
                 {
                     p.tasks.map( (t) => {
 
-                        const onRemoveHendler = (e) => {p.removeTask(t.id)}
+                        const onRemoveHendler = (e) => {p.removeTask(t.id, p.id)}
 
                         const onChangeHendler = (e) => {
-                            p.changeTaskStatus( t.id, e.currentTarget.checked);
+                            p.changeTaskStatus( t.id, e.currentTarget.checked, p.id);
                         }
 
                         return <li key={t.id} className={t.isDone ? 'is-done': ""}>

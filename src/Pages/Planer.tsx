@@ -8,89 +8,121 @@ import { TodoList } from "../Bloks/Bloks_Planer/TodoList.tsx";
 
 
 
-export type FilterValuesType = "all" | "completed" | "active";
+
+export type FilterValuesType = "all" | "completed" | "active"
 
 export type TodolistType = {
-    id: string;
-    title: string;
+    id: string
+    title: string
     filter: FilterValuesType
+    error: null | string
 
 
 }
 
 
 
-
-
-let initTasks = [
-
-    { id: v1(), title: "name", isDone: true },
-    { id: v1(), title: "name", isDone: true },
-    { id: v1(), title: "name", isDone: true },
-    { id: v1(), title: "name", isDone: true },
-    { id: v1(), title: "name", isDone: false },
-    { id: v1(), title: "name", isDone: true },
-    { id: v1(), title: "name", isDone: true },
-    { id: v1(), title: "name", isDone: true },
-    { id: v1(), title: "name", isDone: true },
-    { id: v1(), title: "name", isDone: false },
-    { id: v1(), title: "name", isDone: false },
-    { id: v1(), title: "name", isDone: false },
-]
-
-
-
-
 function Planer() {
 
-    let [tasks, setTasks] = useState(initTasks);
-    let [error, setError] = useState<string | null>(null);
 
+
+    let todoListId1 = "1";
+    let todoListId2 = "2";
+    let todoListId3 = "3";
 
     let [todoList, setTodoList] = useState<Array<TodolistType>> ([
 
-        { id: v1(), title: "What to lern", filter: "active" },
-        { id: v1(), title: "What to buy", filter: "completed" },
-        { id: v1(), title: "What to buy", filter: "completed" },
+        { id: todoListId1, title: "What to lern", filter: "active", error: null },
+        { id: todoListId2, title: "What to buy", filter: "completed"  , error: null},
+        { id: todoListId3, title: "What to coke", filter: "completed" , error: null },
     
     ]);
 
 
-    function addTask(title: string) {
-        if (title.trim() === "") {
-            setError("Pystaia taska");
-            return
 
-        }
+    
+    let [tasksObj, setTasks] = useState({
+        [todoListId1]: [
+            { id: v1(), title: "name", isDone: true },
+            { id: v1(), title: "name", isDone: true },
+            { id: v1(), title: "name", isDone: true },
+            { id: v1(), title: "name", isDone: true },
+            { id: v1(), title: "name", isDone: false },
+            { id: v1(), title: "name", isDone: true },
+            { id: v1(), title: "name", isDone: true },
+            
+        ]
+        ,
+        [todoListId2] : [
+            { id: v1(), title: "name", isDone: true },
+            { id: v1(), title: "name", isDone: true },
+            { id: v1(), title: "name", isDone: true },
+            { id: v1(), title: "name", isDone: true },
+            
+            
+        ]
+        ,
+        [todoListId3] : [
+            { id: v1(), title: "name", isDone: true },
+            { id: v1(), title: "name", isDone: true },
+            { id: v1(), title: "name", isDone: true },
+            { id: v1(), title: "name", isDone: true },
+            
+            
+        ]
+    })
+    
+    
+    function removeTodolist(todoListId:string){
+        let filteredTodolist = todoList.filter(tl=> tl.id !== todoListId );
+        setTodoList(filteredTodolist);
+        delete tasksObj[todoListId];
+        setTasks({...tasksObj});
+    }
+    
 
 
-        let newTask =
-        {
+    function addTask(title: string , todoListId: string) {
+       
+            if (title.trim() === "") {
+                
+                // todoList[todoListId].error = ("Pystaia taska");
+               
+                return
+            }
+            
+        
+        let task = {
             id: v1(),
             title: title,
             isDone: false
         };
 
-        let newTasks = [newTask, ...tasks];
-        setTasks(newTasks);
+        let tasks = tasksObj[todoListId];
+        let newTasks = [task, ...tasks];
+        
+
+        tasksObj[todoListId] = newTasks;
+        setTasks({...tasksObj});
     }
 
 
-    function removeTask(id: string) {
-        setTasks(tasks.filter((t) => t.id !== id));
-    };
 
-    function chengeStatus(id: string, isDone: boolean) {
+    function removeTask(id: string, todoListId: string) {
+        let tasks = tasksObj[todoListId]
+        let filtredTasks = tasks.filter(t => t.id !== id);
+        tasksObj[todoListId] = filtredTasks;
+        setTasks({...tasksObj});
+    }
+
+    function chengeStatus(id: string, isDone: boolean , todoListId: string) {
+        let tasks = tasksObj[todoListId];
         let task = tasks.find(t => t.id === id)
         if (task) {
             task.isDone = isDone;
+            setTasks({...tasksObj});
         }
-        setTasks([...tasks]);
-
-
-
     }
-
 
     function chengeFilter(value: FilterValuesType, todoListId: string) {
         let todolist = todoList.find(tl => tl.id === todoListId);
@@ -106,18 +138,18 @@ function Planer() {
 
     return (
         <div className="page1">
-            <Blok minWidth={24} minHeight={1}>планер</Blok>
+            {/* <Blok minWidth={24} minHeight={1}>планер</Blok> */}
 
 
             {todoList.map((tl) => {
 
-                let TasdksForTodoList = tasks;
+                let TasdksForTodoList = tasksObj[tl.id];
 
                 if (tl.filter === "completed") {
-                    TasdksForTodoList = tasks.filter(t => t.isDone === true)
+                    TasdksForTodoList = TasdksForTodoList.filter(t => t.isDone === true)
                 }
                 if (tl.filter === "active") {
-                    TasdksForTodoList = tasks.filter(t => t.isDone === false)
+                    TasdksForTodoList = TasdksForTodoList.filter(t => t.isDone === false)
                 }
 
                 return (
@@ -127,16 +159,18 @@ function Planer() {
                             id = {tl.id}
                             title={tl.title}
                             tasks={TasdksForTodoList}
-
-                            error={error}
-                            setError={setError}
+                            
+                            error={tl.error}
+                            
 
                             filter={tl.filter}
 
                             removeTask={removeTask}
                             chengeFilter={chengeFilter}
                             addTask={addTask}
-                            changeTaskStatus={chengeStatus} />
+                            changeTaskStatus={chengeStatus} 
+                            removeTodolist={removeTodolist}/>
+                            
 
                     </Blok>
 
