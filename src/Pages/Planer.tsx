@@ -3,6 +3,8 @@ import { v1 } from 'uuid';
 
 import Blok from "../Bloks/Blok.tsx";
 import { TodoList } from "../Bloks/Bloks_Planer/TodoList.tsx";
+import AddItemForm from '../Bloks/Bloks_Planer/AddItemForm.tsx';
+
 
 
 
@@ -15,9 +17,6 @@ export type TodolistType = {
     id: string
     title: string
     filter: FilterValuesType
-    error: null | string
-
-
 }
 
 
@@ -30,11 +29,11 @@ function Planer() {
     let todoListId2 = "2";
     let todoListId3 = "3";
 
-    let [todoList, setTodoList] = useState<Array<TodolistType>> ([
+    let [todoLists, setTodoLists] = useState<Array<TodolistType>> ([
 
-        { id: todoListId1, title: "What to lern", filter: "active", error: null },
-        { id: todoListId2, title: "What to buy", filter: "completed"  , error: null},
-        { id: todoListId3, title: "What to coke", filter: "completed" , error: null },
+        { id: todoListId1, title: "Изучить", filter: "active" },
+        { id: todoListId2, title: "Что приготовить", filter: "completed" },
+        { id: todoListId3, title: "Список книг", filter: "completed"},
     
     ]);
 
@@ -74,8 +73,8 @@ function Planer() {
     
     
     function removeTodolist(todoListId:string){
-        let filteredTodolist = todoList.filter(tl=> tl.id !== todoListId );
-        setTodoList(filteredTodolist);
+        let filteredTodolist = todoLists.filter(tl=> tl.id !== todoListId );
+        setTodoLists(filteredTodolist);
         delete tasksObj[todoListId];
         setTasks({...tasksObj});
     }
@@ -125,23 +124,39 @@ function Planer() {
     }
 
     function chengeFilter(value: FilterValuesType, todoListId: string) {
-        let todolist = todoList.find(tl => tl.id === todoListId);
+        let todolist = todoLists.find(tl => tl.id === todoListId);
         if (todolist) {
             todolist.filter = value;
-            setTodoList([...todoList]);
+            setTodoLists([...todoLists]);
         }
     }
     
+function addTodolist(title: string) {
 
+    let todoList : TodolistType = {
+        id: v1(),
+        filter: 'all',
+        title: title
+    }
+
+    setTodoLists([todoList, ...todoLists]);
+    setTasks({
+        ...tasksObj,
+        [todoList.id]: []
+    })
+}
 
 
 
     return (
+
         <div className="page1">
-            {/* <Blok minWidth={24} minHeight={1}>планер</Blok> */}
+            <Blok minWidth={24} minHeight={2}> 
+            <AddItemForm addItem = {addTodolist} />
+            </Blok>
 
-
-            {todoList.map((tl) => {
+                           
+            {todoLists.map((tl) => {
 
                 let TasdksForTodoList = tasksObj[tl.id];
 
@@ -154,13 +169,12 @@ function Planer() {
 
                 return (
 
-                    <Blok key={tl.id} minWidth={6} maxWidth={8} minHeight={1} maxHeight={24} >
+                    <Blok key={tl.id} minWidth={9} maxWidth={8} minHeight={1} maxHeight={24} >
                         <TodoList
                             id = {tl.id}
                             title={tl.title}
                             tasks={TasdksForTodoList}
                             
-                            error={tl.error}
                             
 
                             filter={tl.filter}

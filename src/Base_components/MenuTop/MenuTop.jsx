@@ -11,7 +11,7 @@ function MenuTop(){
       <div className={s.TopMenu}>
           <NavLink to ='/main'> <img src={logo} alt="" /> </NavLink>
         <div className={s.meni}>
-        Planer
+        Планер
           {/* <NavLink to ='/profil'>-profil-</NavLink> */}
           {/* <NavLink to ='/planer'>-planer-</NavLink>  */}
 

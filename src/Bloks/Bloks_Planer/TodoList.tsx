@@ -1,5 +1,6 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
-import { FilterValuesType } from '../../Pages/Planer';
+import React from 'react';
+import { FilterValuesType } from '../../Pages/Planer.tsx';
+import AddItemForm from './AddItemForm.tsx';
 
 
 
@@ -17,9 +18,6 @@ type DataType = {
     title: string
     tasks: Array<TaskType>
 
-    error: any
-    
-    
     filter: any
     
     removeTask: (id: string, todoListId: string) => void
@@ -35,50 +33,22 @@ type DataType = {
 
 export function TodoList(p: DataType) {
 
-
-    const [NewTaskeTitle, setNewTaskeTitle] = useState("");
-   
-
-    const onNewTitleChengeHander = (e: ChangeEvent<HTMLInputElement>) => { 
-        setNewTaskeTitle(e.currentTarget.value)
-    }
-
-    const OnKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-            
-            if (e.code === 'Enter' ){
-                p.addTask(NewTaskeTitle, p.id);
-                
-            }
-    }
-
-    const addTask = () => {
-        p.addTask(NewTaskeTitle, p.id);
-        setNewTaskeTitle("");
-
-        
-    }
-
     const removeTodolist = () => {
         p.removeTodolist(p.id)
     } 
 
+    const AddTask = (title: string) => {
+        p.addTask(title, p.id);
+    }
+
+
     return (
         <div >
-            <h3>{p.title} <button onClick={removeTodolist} >x</button> </h3>
+            <h3>{p.title} 
+                <button onClick={removeTodolist} >x</button> 
+            </h3>
 
-            <div>
-
-                <input 
-                value={NewTaskeTitle} 
-                onChange={ onNewTitleChengeHander }
-                onKeyDown = { OnKeyPressHandler }
-                className={p.error ? 'error' : ""}
-                ></input>
-                <button onClick={addTask} >+</button>
-                {p.error && <div className='error-message'>Ошибка: нельзя добавить пустую задачу</div>}
-                
-
-            </div>
+            <AddItemForm addItem ={AddTask}/>
             
             <ul>
                 {
@@ -110,3 +80,7 @@ export function TodoList(p: DataType) {
         </div>
     )
 }
+
+
+
+

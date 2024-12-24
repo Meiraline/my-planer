@@ -10,6 +10,7 @@ function MenuBottom(){
         <div>      
       </div>
      <div>
+      <input type="text" />
       <button className={s.BigButton}> + </button>
       </div>
       
